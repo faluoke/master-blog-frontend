@@ -39,7 +39,8 @@ export default function EditPost(props) {
     event.preventDefault();
     axios
       .put(
-        `https://master-blog-api.herokuapp.com/api/post/update/${props.id}`,
+        `https://master-blog-api.herokuapp.com/api/post
+        /update/${props.id}`,
         {
           title: inputs.title,
           author: inputs.author,
@@ -49,7 +50,6 @@ export default function EditPost(props) {
       )
       .then(response => {
         if (response.status === 200) {
-          console.log(response);
           props.fetchPosts();
         }
       })

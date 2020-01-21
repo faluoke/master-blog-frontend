@@ -44,7 +44,6 @@ export default function FormDialog(props) {
       })
       .then(response => {
         if (response.status === 201) {
-          console.log(response);
           props.fetchPosts();
         }
       })

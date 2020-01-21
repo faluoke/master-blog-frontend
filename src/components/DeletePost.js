@@ -34,7 +34,6 @@ export default function DeletePost(props) {
       )
       .then(response => {
         if (response.status === 200) {
-          console.log(response);
           props.fetchPosts();
         }
       })
