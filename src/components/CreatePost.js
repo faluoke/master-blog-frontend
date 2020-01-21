@@ -51,6 +51,14 @@ export default function FormDialog(props) {
         console.log(err);
       });
     setOpen(false);
+
+    //setting inputs to empty
+    setInputs({
+      title: "",
+      author: "",
+      image: "",
+      body: ""
+    });
   };
 
   return (
