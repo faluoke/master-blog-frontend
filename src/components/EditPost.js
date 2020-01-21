@@ -38,12 +38,15 @@ export default function EditPost(props) {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .put(`http://localhost:5000/api/post/update/${props.id}`, {
-        title: inputs.title,
-        author: inputs.author,
-        image: inputs.image,
-        body: inputs.body
-      })
+      .put(
+        `https://master-blog-api.herokuapp.com/api/post/update/${props.id}`,
+        {
+          title: inputs.title,
+          author: inputs.author,
+          image: inputs.image,
+          body: inputs.body
+        }
+      )
       .then(response => {
         if (response.status === 200) {
           console.log(response);

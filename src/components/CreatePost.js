@@ -36,7 +36,7 @@ export default function FormDialog(props) {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/api/post", {
+      .post("https://master-blog-api.herokuapp.com/api/post", {
         title: inputs.title,
         author: inputs.author,
         image: inputs.image,

@@ -29,7 +29,9 @@ export default function DeletePost(props) {
 
   const handleOnClick = () => {
     axios
-      .delete(`http://localhost:5000/api/post/delete/${props.id}`)
+      .delete(
+        `https://master-blog-api.herokuapp.com/api/post/delete/${props.id}`
+      )
       .then(response => {
         if (response.status === 200) {
           console.log(response);

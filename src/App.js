@@ -17,7 +17,7 @@ export default class App extends Component {
 
   fetchPosts = () => {
     axios
-      .get("http://localhost:5000/api/posts")
+      .get("https://master-blog-api.herokuapp.com/api/posts")
       .then(response => {
         if (response.data) {
           let blogPostClone = this.state.blogPosts.slice();
