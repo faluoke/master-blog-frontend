@@ -63,7 +63,7 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button color="inherit" variant="outlined" onClick={handleClickOpen}>
         Create Post
       </Button>
       <Dialog

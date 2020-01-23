@@ -48,13 +48,14 @@ export default function Nav(props) {
             </Link>
           </Typography>
           <CreatePost fetchPosts={props.fetchPosts} />
-          <TextField
+          {/* TODO: add search bar 
+           <TextField
             label="Search"
             id="outlined-margin-dense"
             className={classes.textField}
             margin="dense"
             variant="outlined"
-          />
+          /> */}
         </Toolbar>
       </AppBar>
     </div>
