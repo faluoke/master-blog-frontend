@@ -56,7 +56,7 @@ export default function Post(props) {
             author={props.author}
             image={props.image}
             body={props.body}
-            fetchPosts={props.fetchPosts}
+            editPost={props.editPost}
           />
           <DeletePost id={props.id} fetchPosts={props.fetchPosts} />
         </CardActions>

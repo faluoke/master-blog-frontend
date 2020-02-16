@@ -36,36 +36,14 @@ export default function EditPost(props) {
   };
 
   const handleSubmit = event => {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
     event.preventDefault();
-    axios
-      .get(proxyurl + inputs.image)
-      .then(response => {
-        if (response.status === 200) {
-          axios
-            .put(
-              `https://master-blog-api.herokuapp.com/api/post/update/${props.id}`,
-              {
-                title: inputs.title,
-                author: inputs.author,
-                image: inputs.image,
-                body: inputs.body
-              }
-            )
-            .then(response => {
-              if (response.status === 200) {
-                props.fetchPosts();
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
+    props.editPost(
+      inputs.title,
+      inputs.author,
+      inputs.image,
+      inputs.body,
+      props.id
+    );
     setOpen(false);
   };
 

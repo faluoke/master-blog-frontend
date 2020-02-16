@@ -11,7 +11,8 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      blogPosts: []
+      blogPosts: [],
+      loading: true
     };
   }
 
@@ -23,11 +24,43 @@ export default class App extends Component {
           let blogPostClone = this.state.blogPosts.slice();
           blogPostClone = response.data;
           this.setState({
-            blogPosts: blogPostClone
+            blogPosts: blogPostClone,
+            loading: false
           });
         }
       })
 
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  editPost = (title, author, image, body, id) => {
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    axios
+      .get(proxyurl + image)
+      .then(response => {
+        if (response.status === 200) {
+          axios
+            .put(
+              `https://master-blog-api.herokuapp.com/api/post/update/${id}`,
+              {
+                title: title,
+                author: author,
+                image: image,
+                body: body
+              }
+            )
+            .then(response => {
+              if (response.status === 200) {
+                this.fetchPosts();
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      })
       .catch(err => {
         console.log(err);
       });
@@ -42,8 +75,10 @@ export default class App extends Component {
       <div className="App">
         <Nav fetchPosts={this.fetchPosts} />
         <PostList
+          loading={this.state.loading}
           blogPosts={this.state.blogPosts}
           fetchPosts={this.fetchPosts}
+          editPost={this.editPost}
         />
       </div>
     );
