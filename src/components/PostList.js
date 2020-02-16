@@ -37,6 +37,7 @@ export default function PostList(props) {
                 date={post.date}
                 fetchPosts={props.fetchPosts}
                 editPost={props.editPost}
+                deletePost={props.deletePost}
               />
             );
           })

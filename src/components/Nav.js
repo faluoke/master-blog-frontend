@@ -47,7 +47,10 @@ export default function Nav(props) {
               Master Blog
             </Link>
           </Typography>
-          <CreatePost fetchPosts={props.fetchPosts} />
+          <CreatePost
+            fetchPosts={props.fetchPosts}
+            createPost={props.createPost}
+          />
           {/* TODO: add search bar 
            <TextField
             label="Search"

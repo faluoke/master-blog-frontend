@@ -7,8 +7,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import axios from "axios";
-
 export default function FormDialog(props) {
   const [open, setOpen] = useState(false);
   const [inputs, setInputs] = useState({
@@ -35,21 +33,7 @@ export default function FormDialog(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    axios
-      .post("https://master-blog-api.herokuapp.com/api/post", {
-        title: inputs.title,
-        author: inputs.author,
-        image: inputs.image,
-        body: inputs.body
-      })
-      .then(response => {
-        if (response.status === 201) {
-          props.fetchPosts();
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.createPost(inputs.title, inputs.author, inputs.image, inputs.body);
     setOpen(false);
 
     //setting inputs to empty

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 // import logo from "./logo.svg";
-import "./App.css";
 
 import Nav from "./components/Nav";
 import PostList from "./components/PostList";
@@ -30,6 +29,24 @@ export default class App extends Component {
         }
       })
 
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  createPost = (title, author, image, body) => {
+    axios
+      .post("https://master-blog-api.herokuapp.com/api/post", {
+        title: title,
+        author: author,
+        image: image,
+        body: body
+      })
+      .then(response => {
+        if (response.status === 201) {
+          this.fetchPosts();
+        }
+      })
       .catch(err => {
         console.log(err);
       });
@@ -66,6 +83,19 @@ export default class App extends Component {
       });
   };
 
+  deletePost = id => {
+    axios
+      .delete(`https://master-blog-api.herokuapp.com/api/post/delete/${id}`)
+      .then(response => {
+        if (response.status === 200) {
+          this.fetchPosts();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchPosts();
   }
@@ -73,12 +103,12 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav fetchPosts={this.fetchPosts} />
+        <Nav createPost={this.createPost} />
         <PostList
           loading={this.state.loading}
           blogPosts={this.state.blogPosts}
-          fetchPosts={this.fetchPosts}
           editPost={this.editPost}
+          deletePost={this.deletePost}
         />
       </div>
     );

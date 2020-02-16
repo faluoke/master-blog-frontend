@@ -4,8 +4,6 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button, Typography, makeStyles } from "@material-ui/core";
 
-import axios from "axios";
-
 const useStyles = makeStyles(theme => ({
   typography: {
     padding: theme.spacing(2)
@@ -28,18 +26,7 @@ export default function DeletePost(props) {
   const id = open ? "simple-popover" : undefined;
 
   const handleOnClick = () => {
-    axios
-      .delete(
-        `https://master-blog-api.herokuapp.com/api/post/delete/${props.id}`
-      )
-      .then(response => {
-        if (response.status === 200) {
-          props.fetchPosts();
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    props.deletePost(props.id);
   };
   return (
     <div>

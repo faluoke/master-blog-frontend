@@ -58,7 +58,7 @@ export default function Post(props) {
             body={props.body}
             editPost={props.editPost}
           />
-          <DeletePost id={props.id} fetchPosts={props.fetchPosts} />
+          <DeletePost id={props.id} deletePost={props.deletePost} />
         </CardActions>
       </Card>
     </Grid>
