@@ -17,7 +17,7 @@ export default class App extends Component {
 
   fetchPosts = () => {
     axios
-      .get("http://masterblog.azurewebsites.net/api/blogs")
+      .get("https://masterblog.azurewebsites.net/api/blogs")
       .then((response) => {
         if (response.data) {
           let blogPostClone = this.state.blogPosts.slice();
@@ -36,7 +36,7 @@ export default class App extends Component {
 
   createPost = (title, author, image, body) => {
     axios
-      .post("http://masterblog.azurewebsites.net/api/blogs", {
+      .post("https://masterblog.azurewebsites.net/api/blogs", {
         title: title,
         author: author,
         imageLink: image,
@@ -59,7 +59,7 @@ export default class App extends Component {
       .then((response) => {
         if (response.status === 200) {
           axios
-            .put(`http://masterblog.azurewebsites.net/api/blogs/${id}`, {
+            .put(`https://masterblog.azurewebsites.net/api/blogs/${id}`, {
               title: title,
               author: author,
               imageLink: image,
@@ -82,7 +82,7 @@ export default class App extends Component {
 
   deletePost = (id) => {
     axios
-      .delete(`http://masterblog.azurewebsites.net/api/blogs/${id}`)
+      .delete(`https://masterblog.azurewebsites.net/api/blogs/${id}`)
       .then((response) => {
         if (response.status === 200) {
           this.fetchPosts();
