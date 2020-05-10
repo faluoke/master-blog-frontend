@@ -11,43 +11,43 @@ export default class App extends Component {
 
     this.state = {
       blogPosts: [],
-      loading: true
+      loading: true,
     };
   }
 
   fetchPosts = () => {
     axios
-      .get("https://master-blog-api.herokuapp.com/api/posts")
-      .then(response => {
+      .get("http://masterblog.azurewebsites.net/api/blogs")
+      .then((response) => {
         if (response.data) {
           let blogPostClone = this.state.blogPosts.slice();
           blogPostClone = response.data;
           this.setState({
             blogPosts: blogPostClone,
-            loading: false
+            loading: false,
           });
         }
       })
 
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
   createPost = (title, author, image, body) => {
     axios
-      .post("https://master-blog-api.herokuapp.com/api/post", {
+      .post("http://masterblog.azurewebsites.net/api/blogs", {
         title: title,
         author: author,
-        image: image,
-        body: body
+        imageLink: image,
+        body: body,
       })
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           this.fetchPosts();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -56,42 +56,39 @@ export default class App extends Component {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     axios
       .get(proxyurl + image)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           axios
-            .put(
-              `https://master-blog-api.herokuapp.com/api/post/update/${id}`,
-              {
-                title: title,
-                author: author,
-                image: image,
-                body: body
-              }
-            )
-            .then(response => {
+            .put(`http://masterblog.azurewebsites.net/api/blogs/${id}`, {
+              title: title,
+              author: author,
+              imageLink: image,
+              body: body,
+            })
+            .then((response) => {
               if (response.status === 200) {
                 this.fetchPosts();
               }
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err);
             });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  deletePost = id => {
+  deletePost = (id) => {
     axios
-      .delete(`https://master-blog-api.herokuapp.com/api/post/delete/${id}`)
-      .then(response => {
+      .delete(`http://masterblog.azurewebsites.net/api/blogs/${id}`)
+      .then((response) => {
         if (response.status === 200) {
           this.fetchPosts();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
