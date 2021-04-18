@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from 'axios';
+import apiServer from "./axios";
 // import logo from "./logo.svg";
 
 import Nav from "./components/Nav";
@@ -16,8 +17,8 @@ export default class App extends Component {
   }
 
   fetchPosts = () => {
-    axios
-      .get("https://masterblog.azurewebsites.net/api/blogs")
+    apiServer
+      .get("/posts")
       .then((response) => {
         if (response.data) {
           let blogPostClone = this.state.blogPosts.slice();
@@ -35,11 +36,11 @@ export default class App extends Component {
   };
 
   createPost = (title, author, image, body) => {
-    axios
-      .post("https://masterblog.azurewebsites.net/api/blogs", {
+    apiServer
+      .post("/post", {
         title: title,
         author: author,
-        imageLink: image,
+        image: image,
         body: body,
       })
       .then((response) => {
@@ -58,11 +59,11 @@ export default class App extends Component {
       .get(proxyurl + image)
       .then((response) => {
         if (response.status === 200) {
-          axios
-            .put(`https://masterblog.azurewebsites.net/api/blogs/${id}`, {
+          apiServer
+            .put(`post/update/${id}`, {
               title: title,
               author: author,
-              imageLink: image,
+              image: image,
               body: body,
             })
             .then((response) => {
@@ -81,8 +82,9 @@ export default class App extends Component {
   };
 
   deletePost = (id) => {
-    axios
-      .delete(`https://masterblog.azurewebsites.net/api/blogs/${id}`)
+    console.log(id);
+    apiServer
+      .delete(`post/delete/${id}`)
       .then((response) => {
         if (response.status === 200) {
           this.fetchPosts();

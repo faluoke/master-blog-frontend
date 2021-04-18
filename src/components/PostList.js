@@ -28,12 +28,12 @@ export default function PostList(props) {
           props.blogPosts.map((post) => {
             return (
               <Post
-                key={post.id}
-                id={post.id}
+                key={post._id}
+                id={post._id}
                 author={post.author}
                 title={post.title}
                 body={post.body}
-                image={post.imageLink}
+                image={post.image}
                 date={post.date}
                 fetchPosts={props.fetchPosts}
                 editPost={props.editPost}
